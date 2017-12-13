@@ -1,0 +1,6 @@
+---
+
+monitoring_path: /opt/monitoring
+monitoring_bin_path: "{{monitoring_path}}/bin"
+monitoring_log_path: "{{monitoring_path}}/log"
+monitoring_checks: []

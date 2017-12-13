@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+DATE=$(date +%Y_%m_%d)
+MONITORING_BIN_PATH="{{monitoring_bin_path}}"
+MONITORING_LOG_PATH="{{monitoring_log_path}}"
+MONITORING_LOG_FILE="monitoring_${DATE}.log"
+
+# Execute check scripts
+find ${MONITORING_BIN_PATH} -name "check_*.sh" -type f -exec /bin/bash {} \; | tee -a "${MONITORING_LOG_PATH}/${MONITORING_LOG_FILE}"
+
+# Delete old log files
+find ${MONITORING_LOG_PATH} -name "monitoring_*" -type f -mtime +30 -delete

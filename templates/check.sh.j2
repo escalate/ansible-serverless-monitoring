@@ -1,0 +1,23 @@
+#!/bin/bash
+DATE=$(date +%Y-%m-%d\ %H:%M)
+NAGIOS_PLUGINS_PATH="/usr/lib/nagios/plugins"
+
+NAGIOS_CHECK=$(${NAGIOS_PLUGINS_PATH}/{{check_cmd}})
+RET=$?
+
+if [ ${RET} -eq 1 ]; then
+    echo -e "STATUS:\t\tWARNING - {{check_name}}"
+    echo -e "TIMESTAMP:\t${DATE}"
+    echo -e "OUTPUT:\t\t${NAGIOS_CHECK}"
+    echo ""
+elif [ ${RET} -eq 2 ]; then
+    echo -e "STATUS:\t\tCRITICAL - {{check_name}}"
+    echo -e "TIMESTAMP:\t${DATE}"
+    echo -e "OUTPUT:\t\t${NAGIOS_CHECK}"
+    echo ""
+elif [ ${RET} -ne 0 ]; then
+    echo -e "STATUS:\t\tUNKNOWN - {{check_name}}"
+    echo -e "TIMESTAMP:\t${DATE}"
+    echo -e "OUTPUT:\t\t${NAGIOS_CHECK}"
+    echo ""
+fi
