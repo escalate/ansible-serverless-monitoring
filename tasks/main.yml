@@ -4,8 +4,6 @@
     state: present
   with_items:
     - nagios-plugins
-  tags:
-    - monitoring
 
 - name: Create monitoring folder structure
   ansible.builtin.file:
@@ -18,8 +16,6 @@
     - "{{ monitoring_path }}"
     - "{{ monitoring_bin_path }}"
     - "{{ monitoring_log_path }}"
-  tags:
-    - monitoring
 
 - name: Create check scripts
   ansible.builtin.template:
@@ -32,8 +28,6 @@
     check_name: "{{ item.name }}"
     check_cmd: "{{ item.cmd }}"
   with_items: "{{ monitoring_checks }}"
-  tags:
-    - monitoring
 
 - name: Create master script to run check scripts
   ansible.builtin.template:
@@ -42,8 +36,6 @@
     owner: root
     group: root
     mode: 0755
-  tags:
-    - monitoring
 
 - name: Add cronjob to run master script
   ansible.builtin.cron:
@@ -51,5 +43,3 @@
     minute: "*/5"
     job: "{{ monitoring_bin_path }}/monitoring.sh"
     user: root
-  tags:
-    - monitoring
