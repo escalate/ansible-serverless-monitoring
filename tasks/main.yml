@@ -1,5 +1,5 @@
 - name: Install Nagios plugins package
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: present
   with_items:
@@ -8,7 +8,7 @@
     - monitoring
 
 - name: Create monitoring folder structure
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: root
@@ -22,7 +22,7 @@
     - monitoring
 
 - name: Create check scripts
-  template:
+  ansible.builtin.template:
     src: check.sh.j2
     dest: "{{ monitoring_bin_path }}/check_{{ item.name }}.sh"
     owner: root
@@ -36,7 +36,7 @@
     - monitoring
 
 - name: Create master script to run check scripts
-  template:
+  ansible.builtin.template:
     src: monitoring.sh.j2
     dest: "{{ monitoring_bin_path }}/monitoring.sh"
     owner: root
@@ -46,7 +46,7 @@
     - monitoring
 
 - name: Add cronjob to run master script
-  cron:
+  ansible.builtin.cron:
     name: "Perform Monitoring Checks"
     minute: "*/5"
     job: "{{ monitoring_bin_path }}/monitoring.sh"
