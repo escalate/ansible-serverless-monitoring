@@ -1,5 +1,3 @@
----
-
 - name: Install Nagios plugins package
   apt:
     name: "{{item}}"
