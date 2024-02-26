@@ -3,7 +3,6 @@
 # Ansible Role: Serverless Monitoring
 
 An Ansible role that setups a serverless monitoring based on Nagios plugins and crond on Raspbian and Debian OS.
-This role is compatible with OS version Stretch (9) and Jessie (8).
 
 ## Requirements
 
