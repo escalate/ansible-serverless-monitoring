@@ -1,18 +1,8 @@
 [![Test](https://github.com/escalate/ansible-serverless-monitoring/actions/workflows/test.yml/badge.svg?branch=master&event=push)](https://github.com/escalate/ansible-serverless-monitoring/actions/workflows/test.yml)
 
-# Ansible Role: Serverless Monitoring
+# Ansible Role: Raspberry - Serverless Monitoring
 
-An Ansible role that setups a serverless monitoring based on Nagios plugins and crond on Raspbian and Debian OS.
-
-## Requirements
-
-This role is tested with Ansible version greater equal 2.4.
-
-## Install
-
-```
-$ ansible-galaxy install escalate.serverless-monitoring
-```
+An Ansible role that setups a serverless monitoring based on [Nagios Plugins](https://nagios-plugins.org/) and [cron](https://wiki.debian.org/cron) on Raspberry Pi OS (Debian Bookworm).
 
 ## Role Variables
 
@@ -20,14 +10,24 @@ Please see [defaults/main.yml](https://github.com/escalate/ansible-serverless-mo
 
 ## Dependencies
 
-None
+This role relies on the following dependencies:
+
+* Roles: None
+* Collections: None
+
+## Installation
+
+```
+$ ansible-galaxy role install escalate.serverless_monitoring
+```
 
 ## Example Playbook
 
 ```
 - hosts: all
   roles:
-    - escalate.serverless-monitoring
+    - role: escalate.serverless_monitoring
+      tags: monitoring
 ```
 
 ## License
