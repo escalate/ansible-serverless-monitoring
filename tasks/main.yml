@@ -11,7 +11,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   with_items:
     - "{{ monitoring_path }}"
     - "{{ monitoring_bin_path }}"
@@ -23,7 +23,7 @@
     dest: "{{ monitoring_bin_path }}/check_{{ item.name }}.sh"
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   vars:
     check_name: "{{ item.name }}"
     check_cmd: "{{ item.cmd }}"
@@ -35,7 +35,7 @@
     dest: "{{ monitoring_bin_path }}/monitoring.sh"
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Add cronjob to run master script
   ansible.builtin.cron:
